@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * author by: ANG
@@ -40,8 +39,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserApp getUserById(long id) {
-        return null;
+    public UserApp getUserById(String id) {
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -50,18 +49,37 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserApp updateUser(UserApp u, long id) {
-        return null;
+    public UserApp updateUser(UserApp u, String id) {
+
+        UserApp user = getUserById(id);
+        if(user == null) return null;
+        return userRepository.saveAndFlush(u);
     }
 
     @Override
-    public UserApp addRoleToUser(long roleId, long userId) {
-        return null;
+    public UserApp addRoleToUser(String roleId, String userId) {
+
+        UserApp u = getUserById(userId);
+        RoleApp r = roleService.getRoleById(roleId);
+
+        if(u == null || r == null) return null;
+        u.getRoles().add(r);
+        r.setUser(u);
+        roleService.updateRole(r, roleId);
+        return userRepository.saveAndFlush(u);
     }
 
     @Override
-    public UserApp removeRoleFromUser(long roleId, long userId) {
-        return null;
+    public UserApp removeRoleFromUser(String roleId, String userId) {
+
+        UserApp u = getUserById(userId);
+        RoleApp r = roleService.getRoleById(roleId);
+
+        if(u == null || r == null) return null;
+        u.getRoles().remove(r);
+        r.setUser(null);
+        roleService.updateRole(r, roleId);
+        return userRepository.saveAndFlush(u);
     }
 
     @Override
@@ -70,7 +88,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean deleteUserById(long id) {
-        return false;
+    public boolean deleteUserById(String id) {
+        UserApp user = getUserById(id);
+        if(user == null) return false;
+        userRepository.delete(user);
+        return true;
     }
 }

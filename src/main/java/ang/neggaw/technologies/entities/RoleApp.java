@@ -25,8 +25,12 @@ public class RoleApp implements Serializable {
 
     private String roleName;
 
-//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
-//    @ToString.Exclude
-//    private Set<UserApp> users;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "roleId", referencedColumnName = "roleId"),
+            inverseJoinColumns = @JoinColumn(name = "userId", referencedColumnName = "id")
+    )
+    @ToString.Exclude
+    private UserApp user;
 
 }

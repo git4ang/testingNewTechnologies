@@ -33,8 +33,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public RoleApp getRoleById(long id) {
-        return null;
+    public RoleApp getRoleById(String id) {
+        return roleRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -48,12 +48,19 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public RoleApp updateRole(RoleApp r, long id) {
-        return null;
+    public RoleApp updateRole(RoleApp r, String id) {
+
+        RoleApp role = getRoleById(id);
+        if(role == null) return null;
+        return roleRepository.saveAndFlush(r);
     }
 
     @Override
-    public boolean deleteRoleById(long id) {
-        return false;
+    public boolean deleteRoleById(String id) {
+
+        RoleApp role = getRoleById(id);
+        if(role == null) return false;
+        roleRepository.delete(role);
+        return true;
     }
 }

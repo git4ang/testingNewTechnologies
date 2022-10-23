@@ -4,7 +4,6 @@ import ang.neggaw.technologies.entities.RoleApp;
 import ang.neggaw.technologies.entities.UserApp;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * author by: ANG
@@ -13,13 +12,11 @@ import java.util.Set;
 
 public interface UserService {
     void createUser(UserApp u);
-    UserApp getUserById(long id);
+    UserApp getUserById(String id);
     List<UserApp> allUsers();
-    UserApp updateUser(UserApp u, long id);
-    UserApp addRoleToUser(long roleId, long userId);
-    UserApp removeRoleFromUser(long roleId, long userId);
-
+    UserApp updateUser(UserApp u, String id);
+    UserApp addRoleToUser(String roleId, String userId);
+    UserApp removeRoleFromUser(String roleId, String userId);
     List<RoleApp> getRoles();
-
-    boolean deleteUserById(long id);
+    boolean deleteUserById(String id);
 }

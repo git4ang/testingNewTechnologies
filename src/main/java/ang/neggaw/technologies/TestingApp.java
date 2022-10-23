@@ -27,9 +27,9 @@ public class TestingApp {
         return args -> {
 
             // role DB
-            roleService.createRole(new RoleApp(UUID.randomUUID().toString(), "ADMIN"));
-            roleService.createRole(new RoleApp(UUID.randomUUID().toString(), "USER"));
-            roleService.createRole(new RoleApp(UUID.randomUUID().toString(), "GUEST"));
+            roleService.createRole(new RoleApp(UUID.randomUUID().toString(), "ADMIN", null));
+            roleService.createRole(new RoleApp(UUID.randomUUID().toString(), "USER", null));
+            roleService.createRole(new RoleApp(UUID.randomUUID().toString(), "GUEST", null));
 
             // address
             Address address = new Address(1, "Av street", "13000", "Marseille", "France");

@@ -31,11 +31,7 @@ public class UserApp extends Person {
 
     private boolean enabled;
 
-    @OneToMany
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "roleId")
-    )
+    @OneToMany(mappedBy = "user")
     @ToString.Exclude
     private List<RoleApp> roles = new ArrayList<>();
 }

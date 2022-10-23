@@ -11,10 +11,10 @@ import java.util.List;
 
 public interface RoleService {
     void createRole(RoleApp r);
-    RoleApp getRoleById(long id);
+    RoleApp getRoleById(String id);
     RoleApp getRoleByRoleName(String admin);
     List<RoleApp> allRoles();
-    RoleApp updateRole(RoleApp r, long id);
-    boolean deleteRoleById(long id);
+    RoleApp updateRole(RoleApp r, String id);
+    boolean deleteRoleById(String id);
 
 }
