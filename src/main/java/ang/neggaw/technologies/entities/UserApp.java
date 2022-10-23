@@ -1,11 +1,8 @@
-package ang.neggaw.testingnewtechnologies.entities;
+package ang.neggaw.technologies.entities;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -18,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter @Getter
-@Builder @ToString
+@Builder @ToString(callSuper = true)
 public class UserApp extends Person {
 
     @Column(unique = true)
@@ -32,6 +29,10 @@ public class UserApp extends Person {
     private boolean enabled;
 
     @OneToMany
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id")
+    )
     @ToString.Exclude
     private Set<RoleApp> roles;
 }

@@ -1,8 +1,9 @@
-package ang.neggaw.testingnewtechnologies.entities;
+package ang.neggaw.technologies.entities;
 
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * author by: ANG
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Setter @Getter
 @Builder @ToString
-public class RoleApp {
+public class RoleApp implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

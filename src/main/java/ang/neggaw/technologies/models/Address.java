@@ -1,8 +1,9 @@
-package ang.neggaw.testingnewtechnologies.Models;
+package ang.neggaw.technologies.models;
 
 import lombok.*;
 
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 /**
  * author by: ANG
@@ -14,7 +15,7 @@ import javax.persistence.Embeddable;
 @Getter @Setter
 @ToString
 @Embeddable
-public class Address {
+public class Address implements Serializable {
 
     private int number;
     private String street;

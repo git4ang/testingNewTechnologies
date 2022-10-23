@@ -1,6 +1,6 @@
-package ang.neggaw.testingnewtechnologies.entities;
+package ang.neggaw.technologies.entities;
 
-import ang.neggaw.testingnewtechnologies.Models.Address;
+import ang.neggaw.technologies.models.Address;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter @Getter
-@Builder @ToString
+@ToString
 @MappedSuperclass
 public class Person implements Serializable {
 
