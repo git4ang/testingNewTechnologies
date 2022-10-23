@@ -1,6 +1,7 @@
 package ang.neggaw.technologies.util;
 
-import lombok.Getter;
+import ang.neggaw.technologies.entities.RoleApp;
+import ang.neggaw.technologies.entities.UserApp;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -11,16 +12,23 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
 
-    @Getter
     private static final SessionFactory sessionFactory;
 
     private HibernateUtil() {}
 
     static {
-        sessionFactory = new Configuration().configure().buildSessionFactory();
+        try {
+            sessionFactory = new Configuration()
+                    .configure("hibernate.cfg.xml")
+                    .buildSessionFactory();
+        } catch (Exception e) {
+            throw new ExceptionInInitializerError(e);
+        }
     }
 
     public static void closingSF() {
         sessionFactory.close();
     }
+
+    public static SessionFactory getSessionFactory() { return sessionFactory; }
 }

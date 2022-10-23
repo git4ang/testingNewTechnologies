@@ -3,6 +3,9 @@ package ang.neggaw.technologies.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -31,8 +34,8 @@ public class UserApp extends Person {
     @OneToMany
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id")
+            inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "roleId")
     )
     @ToString.Exclude
-    private Set<RoleApp> roles;
+    private List<RoleApp> roles = new ArrayList<>();
 }

@@ -8,6 +8,7 @@ pipeline {
             }
         }
 
+        /*
         stage("DEV") {
             steps {
                 sh "mvn clean compile"
@@ -17,6 +18,16 @@ pipeline {
         stage("TEST") {
             steps {
                 sh "mvn test"
+            }
+        }
+        */
+
+        stage("SONARQUBE") {
+            steps {
+                sh "mvn clean verify sonar:sonar "
+                    "-Dsonar.projectKey=newTechnologiesTest "
+                    "-Dsonar.host.url=http://localhost:9000 "
+                    "-Dsonar.login=sqp_4abec21ee8285dd55d625435e2d4abd2b0b4b3dd"
             }
         }
 

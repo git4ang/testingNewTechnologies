@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * author by: ANG
@@ -19,9 +20,13 @@ import java.io.Serializable;
 public class RoleApp implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String roleId;
 
     private String roleName;
+
+//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
+//    @ToString.Exclude
+//    private Set<UserApp> users;
 
 }

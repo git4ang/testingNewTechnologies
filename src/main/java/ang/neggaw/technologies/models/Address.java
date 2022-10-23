@@ -18,8 +18,12 @@ import java.io.Serializable;
 public class Address implements Serializable {
 
     private int number;
+
     private String street;
+
     private String codePostal;
+
     private String city;
+
     private String country;
 }
