@@ -27,9 +27,10 @@ public class RoleRestController {
     public ResponseEntity<Void> createRole(@RequestBody RoleApp r) {
 
         try {
-            return null;
+            roleService.createRole(r);
+            return ResponseEntity.status(HttpStatus.OK).build();
         } catch (Exception e) {
-            log.error("Error ", e);
+            log.error("Error creating Role: ", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
@@ -37,9 +38,11 @@ public class RoleRestController {
     @GetMapping("/{roleId}")
     public ResponseEntity<RoleApp> getRoleById(@PathVariable String roleId) {
         try {
-            return null;
+            RoleApp r = roleService.getRoleById(roleId);
+            if(r == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.FOUND).body(r);
         } catch (Exception e) {
-            log.error("Error ", e);
+            log.error("Error getting Role with id: {}", roleId, e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
@@ -47,9 +50,11 @@ public class RoleRestController {
     @GetMapping("/name/{roleName}")
     public ResponseEntity<RoleApp> getRoleByName(@PathVariable String roleName) {
         try {
-            return null;
+            RoleApp r = roleService.getRoleByRoleName(roleName);
+            if(r == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.FOUND).body(r);
         } catch (Exception e) {
-            log.error("Error ", e);
+            log.error("Error getting Role with roleName: {}", roleName, e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
@@ -57,19 +62,24 @@ public class RoleRestController {
     @GetMapping
     public ResponseEntity<List<RoleApp>> allRoles() {
         try {
-            return null;
+            List<RoleApp> roles = roleService.allRoles();
+            if(roles.isEmpty()) return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            return ResponseEntity.status(HttpStatus.FOUND).body(roles);
         } catch (Exception e) {
-            log.error("Error ", e);
+            log.error("Error getting list of Roles: ", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 
     @PatchMapping("/{roleId}")
-    public ResponseEntity<RoleApp> updateRole(@PathVariable String roleId) {
+    public ResponseEntity<RoleApp> updateRole(@RequestBody RoleApp r,
+                                              @PathVariable String roleId) {
         try {
-            return null;
+            RoleApp role = roleService.updateRole(r, roleId);
+            if(role == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.OK).body(r);
         } catch (Exception e) {
-            log.error("Error ", e);
+            log.error("Error updating Role with id: {}", roleId, e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
@@ -77,9 +87,10 @@ public class RoleRestController {
     @DeleteMapping("/{roleId}")
     public ResponseEntity<RoleApp> deleteRoleById(@PathVariable String roleId) {
         try {
-            return null;
+            if(!roleService.deleteRoleById(roleId)) return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.OK).body(roleService.getRoleById(roleId));
         } catch (Exception e) {
-            log.error("Error ", e);
+            log.error("Error deleting Role with id: {}", roleId, e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
