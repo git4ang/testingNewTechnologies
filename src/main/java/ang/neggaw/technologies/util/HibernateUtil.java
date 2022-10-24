@@ -1,7 +1,5 @@
 package ang.neggaw.technologies.util;
 
-import ang.neggaw.technologies.entities.RoleApp;
-import ang.neggaw.technologies.entities.UserApp;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
